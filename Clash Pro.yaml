@@ -517,7 +517,7 @@ proxy-groups:
     interval: 600
     timeout: 5
     tolerance: 50
-    include-all-proxies: false
+    include-all-proxies: true
   - name: 台湾-PRO
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
