@@ -521,6 +521,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+    use:
+      - GlaDos
     filter: (?i)(\[US\]|^US$|USA|United States|\bUS\b|美国)
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -530,6 +532,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+    use:
+      - GlaDos
     filter: "(?i)(\\[TW\\]|^TW$|Taiwan|Taibei|\\bTW\\b|台湾|台北|\U0001F1F9\U0001F1FC|Fast|Balancer-B)"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -539,6 +543,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+    use:
+      - GlaDos
     filter: "(?i)(\\[JP\\]|^JP$|Japan|\\bJP\\b|日本|东京|大阪|\U0001F1EF\U0001F1F5日本)"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -548,6 +554,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+    use:
+      - GlaDos
     filter: (?i)(\[SG\]|^SG$|Singapore|\bSG\b|新加坡|狮城)
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -557,6 +565,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
+    use:
+      - Shadowsocks
     filter: "(?i)(\\[HK\\]|^HK$|Hong Kong|\\bHK\\b|香港|\U0001F1ED\U0001F1F0香港|有效期)"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -566,6 +576,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1FA\U0001F1F8|美国|俄勒冈|拉斯维加斯|洛杉矶|芝加哥|(\\b(US|USA|United States)\\b)))(?!.*((?i)V6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -575,6 +587,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1EF\U0001F1F5|日本|东京|(\\b(JP|Japan)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -584,6 +598,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1F8\U0001F1EC|新加坡|狮|(\\b(SG|Singapore)\\b)))(?!.*((?i)回国|校园|游戏|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -593,6 +609,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E6\U0001F1FA|澳大利亚|澳洲|(\\b(AU|Australia)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -602,6 +620,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Kingdom.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1EC\U0001F1E7|英国|英|苏格兰|伦敦|英格兰|威尔士|(\\b(UK|England)\\b)))(?!.*((?i)回国|校园|V6|游戏|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -611,6 +631,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/120px/NL.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1F3\U0001F1F1|荷兰|荷|(\\b(NL|Netherlands)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -620,6 +642,8 @@ proxy-groups:
     type: url-test
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E9\U0001F1EA|德国|德|(\\b(DE|Germany)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -629,6 +653,8 @@ proxy-groups:
     type: select
     include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    use:
+      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E8\U0001F1F3|台湾|台|(\\b(TW|Taiwan|Tai)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
@@ -638,6 +664,8 @@ proxy-groups:
     type: select
     include-all: false
     icon: https://raw.githubusercontent.com/jianoliu/ios_rule_script/refs/heads/master/icon/color/ipv6-2.png
+    use:
+      - Shadowsocks
     filter: PRO-V6
     hidden: true
 rules:
