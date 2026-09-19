@@ -481,6 +481,24 @@ proxy-groups:
       - 荷兰-PRO
       - 德国-PRO
       - 台湾-PRO
+  - name: Bilibili
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
   - name: Disney
     type: select
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/DisneyPlus.png
@@ -655,7 +673,7 @@ rules:
   - GEOSITE,twitch,X
   - GEOSITE,primevideo,Proxy
   - GEOSITE,bahamut,Proxy
-  - GEOSITE,biliintl,Proxy
+  - GEOSITE,biliintl,Bilibili
   - GEOSITE,dazn,Proxy
   - GEOSITE,hulu,Proxy
   - GEOSITE,abema,Proxy
