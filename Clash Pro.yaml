@@ -1,108 +1,3 @@
-# General
-mixed-port: 7890
-allow-lan: false
-bind-address: '*'
-mode: rule
-log-level: info
-external-controller: '127.0.0.1:9090'
-unified-delay: true
-tcp-concurrent: true
-ipv6: false
-
-tun:
-  enable: true
-  stack: gvisor
-  auto-route: true
-  auto-detect-interface: true
-  strict-route: true
-  dns-hijack:
-    - any:53
-dns:
-  enable: true
-  respect-rules: true
-  ipv6: true
-  prefer-h3: false
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-    - 2400:3200::1
-
-  nameserver:
-    - https://dns.cloudflare.com/dns-query
-    - https://dns.google/dns-query
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-
-  proxy-server-nameserver-policy:
-
-  proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-
-  direct-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
-
-  nameserver-policy:
-    'dns.cloudflare.com':
-      - 1.1.1.1
-      - 1.0.0.1
-    'dns.google':
-      - 8.8.8.8
-      - 8.8.4.4
-    'dns.quad9.net':
-      - 9.9.9.9
-      - 149.112.112.112
-    'dns.alidns.com':
-      - 223.5.5.5
-      - 223.6.6.6
-    'doh.pub':
-      - 1.12.12.12
-      - 120.53.53.53
-    'geosite:cn':
-      - https://dns.alidns.com/dns-query
-      - https://doh.pub/dns-query
-
-
-  fallback:
-    - https://anycast.uncensoreddns.org/dns-query
-
-
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-      - 127.0.0.0/8
-      - 0.0.0.0/32
- 
-  fake-ip-filter:
-    - '*.lan'
-    - '*.local'
-    - 'localhost'
-    - '*.msftconnecttest.com'
-    - '*.msftncsi.com'
-    - '*.msidentity.com'
-    - 'captive.apple.com'
-    - '*.push.apple.com'
-    - 'stun.*'
-    - '+.stun.*.*'
-    - '+.stun.*.*.*'
-    - '+.stun.*.*.*.*'
-    - '+.stun.*.*.*.*.*'
-    - '+.weixin.com'
-    - '+.wechat.com'
-    - '+.qq.com'
-    - '+.tencent.com'
-    - 'speedtest.net'
-
-profile:
-  store-selected: true
-  store-fake-ip: true
-
 proxy-groups:
   - name: Proxy
     type: select
@@ -126,7 +21,6 @@ proxy-groups:
       - DIRECT
   - name: Manual
     type: select
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
     proxies:
       - GlaDos美国
@@ -165,7 +59,6 @@ proxy-groups:
     tolerance: 50
   - name: AdBlock
     type: select
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
     proxies:
       - REJECT
@@ -486,8 +379,8 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/bilibili_3.png
     proxies:
       - Proxy
+      - DIRECT
       - Manual
-      - Auto
       - GlaDos美国
       - GlaDos台湾
       - 香港-PRO
@@ -519,153 +412,119 @@ proxy-groups:
       - 台湾-PRO
   - name: GlaDos美国
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
-    use:
-      - GlaDos
     filter: (?i)(\[US\]|^US$|USA|United States|\bUS\b|美国)
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: GlaDos台湾
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
-    use:
-      - GlaDos
     filter: "(?i)(\\[TW\\]|^TW$|Taiwan|Taibei|\\bTW\\b|台湾|台北|\U0001F1F9\U0001F1FC|Fast|Balancer-B)"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: GlaDos日本
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
-    use:
-      - GlaDos
     filter: "(?i)(\\[JP\\]|^JP$|Japan|\\bJP\\b|日本|东京|大阪|\U0001F1EF\U0001F1F5日本)"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: GlaDos新加坡
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
-    use:
-      - GlaDos
     filter: (?i)(\[SG\]|^SG$|Singapore|\bSG\b|新加坡|狮城)
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 香港-PRO
     type: url-test
-    include-all: false
     icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
-    use:
-      - Shadowsocks
     filter: "(?i)(\\[HK\\]|^HK$|Hong Kong|\\bHK\\b|香港|\U0001F1ED\U0001F1F0香港|有效期)"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 美国-PRO
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1FA\U0001F1F8|美国|俄勒冈|拉斯维加斯|洛杉矶|芝加哥|(\\b(US|USA|United States)\\b)))(?!.*((?i)V6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 日本-PRO
-    type: url-test
-    include-all: false
+    type: url-tes
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1EF\U0001F1F5|日本|东京|(\\b(JP|Japan)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 新加坡-PRO
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1F8\U0001F1EC|新加坡|狮|(\\b(SG|Singapore)\\b)))(?!.*((?i)回国|校园|游戏|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 澳大利亚-PRO
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E6\U0001F1FA|澳大利亚|澳洲|(\\b(AU|Australia)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 英国-PRO
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Kingdom.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1EC\U0001F1E7|英国|英|苏格兰|伦敦|英格兰|威尔士|(\\b(UK|England)\\b)))(?!.*((?i)回国|校园|V6|游戏|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 荷兰-PRO
     type: url-test
-    include-all: false
     icon: https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/120px/NL.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1F3\U0001F1F1|荷兰|荷|(\\b(NL|Netherlands)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 德国-PRO
     type: url-test
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E9\U0001F1EA|德国|德|(\\b(DE|Germany)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
     interval: 600
     timeout: 5
     tolerance: 50
+    include-all-proxies: false
   - name: 台湾-PRO
     type: select
-    include-all: false
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
-    use:
-      - Shadowsocks
     filter: "^(?=.*((?i)\U0001F1E8\U0001F1F3|台湾|台|(\\b(TW|Taiwan|Tai)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
-    url: http://www.gstatic.com/generate_204
-    interval: 600
-    timeout: 5
-    tolerance: 50
   - name: IPV6
     type: select
-    include-all: false
     icon: https://raw.githubusercontent.com/jianoliu/ios_rule_script/refs/heads/master/icon/color/ipv6-2.png
-    use:
-      - Shadowsocks
     filter: PRO-V6
     hidden: true
 rules:
