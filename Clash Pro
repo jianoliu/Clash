@@ -1,0 +1,789 @@
+# General
+mixed-port: 7890
+allow-lan: false
+bind-address: '*'
+mode: rule
+log-level: info
+external-controller: '127.0.0.1:9090'
+unified-delay: true
+tcp-concurrent: true
+ipv6: false
+
+tun:
+  enable: true
+  stack: gvisor
+  auto-route: true
+  auto-detect-interface: true
+  strict-route: true
+  dns-hijack:
+    - any:53
+dns:
+  enable: true
+  respect-rules: true
+  ipv6: true
+  prefer-h3: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 2400:3200::1
+
+  nameserver:
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+
+  proxy-server-nameserver-policy:
+
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+
+  nameserver-policy:
+    'dns.cloudflare.com':
+      - 1.1.1.1
+      - 1.0.0.1
+    'dns.google':
+      - 8.8.8.8
+      - 8.8.4.4
+    'dns.quad9.net':
+      - 9.9.9.9
+      - 149.112.112.112
+    'dns.alidns.com':
+      - 223.5.5.5
+      - 223.6.6.6
+    'doh.pub':
+      - 1.12.12.12
+      - 120.53.53.53
+    'geosite:cn':
+      - https://dns.alidns.com/dns-query
+      - https://doh.pub/dns-query
+
+
+  fallback:
+    - https://anycast.uncensoreddns.org/dns-query
+
+
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+      - 127.0.0.0/8
+      - 0.0.0.0/32
+ 
+  fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - 'localhost'
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - '*.msidentity.com'
+    - 'captive.apple.com'
+    - '*.push.apple.com'
+    - 'stun.*'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - '+.stun.*.*.*.*.*'
+    - '+.weixin.com'
+    - '+.wechat.com'
+    - '+.qq.com'
+    - '+.tencent.com'
+    - 'speedtest.net'
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+    proxies:
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos新加坡
+      - GlaDos日本
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+      - DIRECT
+  - name: Manual
+    type: select
+    include-all: false
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Static.png
+    proxies:
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Auto
+    type: url-test
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+    proxies:
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: AdBlock
+    type: select
+    include-all: false
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: Apple
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png
+    proxies:
+      - DIRECT
+      - Proxy
+      - Auto
+      - Manual
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: GitHub
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/GitHub.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Telegram
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: X
+    type: select
+    icon: https://raw.githubusercontent.com/jianoliu/icon/refs/heads/master/color/X-1.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Instagram
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Instagram.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Facebook
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Facebook.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: PayPal
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/PayPal.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: ChatGPT
+    type: select
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/ChatGPT5.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Netflix
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Gemini
+    type: select
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Gemini_01.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: YouTube
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Google
+    type: select
+    icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/google(2).png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Microsoft
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - DIRECT
+      - GlaDos美国
+      - GlaDos台湾
+      - GlaDos日本
+      - GlaDos新加坡
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Cloudflare
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Cloudflare.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+  - name: Spotify
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: TikTok
+    type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/TikTok.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: Disney
+    type: select
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/DisneyPlus.png
+    proxies:
+      - Proxy
+      - Manual
+      - Auto
+      - GlaDos美国
+      - GlaDos台湾
+      - 香港-PRO
+      - 美国-PRO
+      - 日本-PRO
+      - 新加坡-PRO
+      - 澳大利亚-PRO
+      - 英国-PRO
+      - 荷兰-PRO
+      - 德国-PRO
+      - 台湾-PRO
+  - name: GlaDos美国
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/US.png
+    filter: (?i)(\[US\]|^US$|USA|United States|\bUS\b|美国)
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: GlaDos台湾
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/TW.png
+    filter: "(?i)(\\[TW\\]|^TW$|Taiwan|Taibei|\\bTW\\b|台湾|台北|\U0001F1F9\U0001F1FC|Fast|Balancer-B)"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: GlaDos日本
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/JP.png
+    filter: "(?i)(\\[JP\\]|^JP$|Japan|\\bJP\\b|日本|东京|大阪|\U0001F1EF\U0001F1F5日本)"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: GlaDos新加坡
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Orz-3/mini/master/Color/SG.png
+    filter: (?i)(\[SG\]|^SG$|Singapore|\bSG\b|新加坡|狮城)
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 香港-PRO
+    type: url-test
+    include-all: true
+    icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Hong_Kong.png
+    filter: "(?i)(\\[HK\\]|^HK$|Hong Kong|\\bHK\\b|香港|\U0001F1ED\U0001F1F0香港|有效期)"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 美国-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+    filter: "^(?=.*((?i)\U0001F1FA\U0001F1F8|美国|俄勒冈|拉斯维加斯|洛杉矶|芝加哥|(\\b(US|USA|United States)\\b)))(?!.*((?i)V6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 日本-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+    filter: "^(?=.*((?i)\U0001F1EF\U0001F1F5|日本|东京|(\\b(JP|Japan)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 新加坡-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+    filter: "^(?=.*((?i)\U0001F1F8\U0001F1EC|新加坡|狮|(\\b(SG|Singapore)\\b)))(?!.*((?i)回国|校园|游戏|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 澳大利亚-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Australia.png
+    filter: "^(?=.*((?i)\U0001F1E6\U0001F1FA|澳大利亚|澳洲|(\\b(AU|Australia)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 英国-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_Kingdom.png
+    filter: "^(?=.*((?i)\U0001F1EC\U0001F1E7|英国|英|苏格兰|伦敦|英格兰|威尔士|(\\b(UK|England)\\b)))(?!.*((?i)回国|校园|V6|游戏|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 荷兰-PRO
+    type: url-test
+    include-all: true
+    icon: https://gitlab.com/lodepuly/iconlibrary/-/raw/main/Flag_icon/120px/NL.png
+    filter: "^(?=.*((?i)\U0001F1F3\U0001F1F1|荷兰|荷|(\\b(NL|Netherlands)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 德国-PRO
+    type: url-test
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Germany.png
+    filter: "^(?=.*((?i)\U0001F1E9\U0001F1EA|德国|德|(\\b(DE|Germany)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: 台湾-PRO
+    type: select
+    include-all: true
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+    filter: "^(?=.*((?i)\U0001F1E8\U0001F1F3|台湾|台|(\\b(TW|Taiwan|Tai)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+    timeout: 5
+    tolerance: 50
+  - name: IPV6
+    type: select
+    include-all: true
+    icon: https://raw.githubusercontent.com/jianoliu/ios_rule_script/refs/heads/master/icon/color/ipv6-2.png
+    filter: PRO-V6
+    hidden: true
+rules:
+  - RULE-SET,Advertising,AdBlock
+  - RULE-SET,Apple,Apple
+  - RULE-SET,ChinaIPs,DIRECT
+  - RULE-SET,ChinaMax,DIRECT
+  - RULE-SET,Lan,DIRECT
+  - RULE-SET,X,X
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,GitHub,GitHub
+  - RULE-SET,Facebook,Facebook
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,Google,Google
+  - RULE-SET,Microsoft,Microsoft
+  - RULE-SET,ChatGPT,ChatGPT
+  - RULE-SET,PayPal,PayPal
+  - RULE-SET,Netflix,Netflix
+  - RULE-SET,Global,Proxy
+  - GEOSITE,tiktok,TikTok
+  - GEOSITE,google-gemini,Gemini
+  - GEOSITE,instagram,Instagram
+  - GEOSITE,disney,Disney
+  - GEOSITE,spotify,Spotify
+  - GEOSITE,cloudfllare,Cloudflare
+  - GEOSITE,category-ai-!cn,ChatGPT
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,netflix,Netflix
+  - GEOIP,netflix,Netflix,no-resolve
+  - GEOSITE,telegram,Telegram
+  - GEOIP,telegram,Telegram,no-resolve
+  - GEOSITE,hbo,Proxy
+  - GEOSITE,twitch,X
+  - GEOSITE,primevideo,Proxy
+  - GEOSITE,bahamut,Proxy
+  - GEOSITE,biliintl,Proxy
+  - GEOSITE,dazn,Proxy
+  - GEOSITE,hulu,Proxy
+  - GEOSITE,abema,Proxy
+  - GEOSITE,bbc,Proxy
+  - GEOSITE,dmm,Proxy
+  - GEOSITE,niconico,Proxy
+  - GEOSITE,viu,Proxy
+  - GEOSITE,soundcloud,Proxy
+  - GEOSITE,discoveryplus,Proxy
+  - GEOSITE,epicgames,Proxy
+  - GEOSITE,origin,Proxy
+  - GEOSITE,sony,Proxy
+  - GEOSITE,nintendo,Proxy
+  - GEOSITE,steam,Proxy
+  - GEOSITE,apple,Apple
+  - GEOSITE,microsoft,Microsoft
+  - GEOSITE,bilibili,Bilibili
+  - GEOSITE,googlefcm,Google
+  - GEOSITE,geolocation-!cn,Proxy
+  - DOMAIN-KEYWORD,trojanflare,Proxy
+  - DOMAIN-KEYWORD,glados,Proxy
+  - DOMAIN-KEYWORD,uncensoreddns,Proxy
+  - DOMAIN-KEYWORD,deepshark,Proxy
+  - DOMAIN-KEYWORD,surge,Proxy
+  - DOMAIN-KEYWORD,nssurge,Proxy
+  - DOMAIN-KEYWORD,egern,Proxy
+  - DOMAIN-KEYWORD,chatra,Proxy
+  - DOMAIN-KEYWORD,shots,Proxy
+  - DOMAIN-KEYWORD,perfops,Proxy
+  - GEOSITE,private,DIRECT
+  - GEOIP,private,DIRECT,no-resolve
+  - GEOSITE,CN,DIRECT
+  - GEOIP,CN,DIRECT,no-resolve
+  - MATCH,Proxy
+rule-providers:
+  Apple:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple_Classical.yaml
+  Advertising:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/AdvertisingLite/AdvertisingLite_Classical.yaml
+  ChatGPT:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OpenAI/OpenAI.yaml
+  ChinaIPs:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaIPs/ChinaIPs_Classical.yaml
+  ChinaMax:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml
+  Facebook:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Facebook/Facebook.yaml
+  GitHub:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/GitHub/GitHub.yaml
+  Global:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Global/Global_Classical.yaml
+  Google:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google.yaml
+  Lan:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Lan/Lan.yaml
+  Microsoft:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft.yaml
+  Netflix:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Netflix/Netflix_Classical.yaml
+  PayPal:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/PayPal/PayPal.yaml
+  Telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Telegram/Telegram.yaml
+  X:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitter/Twitter.yaml
+  YouTube:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 86400
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/YouTube/YouTube.yaml
