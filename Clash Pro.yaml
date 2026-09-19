@@ -527,6 +527,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/jianoliu/ios_rule_script/refs/heads/master/icon/color/ipv6-2.png
     filter: PRO-V6
+    include-all-proxies: true
     hidden: true
 rules:
   - RULE-SET,Advertising,AdBlock
