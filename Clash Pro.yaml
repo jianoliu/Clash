@@ -522,7 +522,7 @@ proxy-groups:
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
     filter: "^(?=.*((?i)\U0001F1E8\U0001F1F3|台湾|台|(\\b(TW|Taiwan|Tai)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
-    include-all-proxies: false
+    include-all-proxies: true
   - name: IPV6
     type: select
     icon: https://raw.githubusercontent.com/jianoliu/ios_rule_script/refs/heads/master/icon/color/ipv6-2.png
