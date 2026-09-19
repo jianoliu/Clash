@@ -465,7 +465,7 @@ proxy-groups:
     tolerance: 50
     include-all-proxies: true
   - name: 日本-PRO
-    type: url-tes
+    type: url-test
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
     filter: "^(?=.*((?i)\U0001F1EF\U0001F1F5|日本|东京|(\\b(JP|Japan)\\b)))(?!.*((?i)v6|(\\b(GAME)\\b))).*$"
     url: http://www.gstatic.com/generate_204
